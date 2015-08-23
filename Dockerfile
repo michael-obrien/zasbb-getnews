@@ -10,5 +10,6 @@ RUN npm install
 RUN npm build
 
 EXPOSE 10109
+ENV ZASBB_FUNCTION="Get News"
 
 ENTRYPOINT ["npm", "start"]
