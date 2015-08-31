@@ -1,12 +1,21 @@
 'use strict';
 
-var bb = require('./bbparse');
-var timeConvert = require('./time-convert');
+var bb = require('./10_bbparse');
+var timeConvert = require('./11_time-convert');
 
 var seneca = require('seneca')();
 
 seneca.listen(10109); //requests from Hapi REST
-seneca.client(10101); //requests to Directory Services
+
+//discovery
+seneca.add({cmd:'config'}, function (msg, response) {
+  msg.data.forEach(function (item) {
+    if (item.name === 'Directory') {
+      seneca.client({host:item.address, port:10101});
+    }
+  })
+  response(null, msg.data);
+});
 
 seneca.add({role:"get",cmd:"news"}, function( msg, respond) {
 
