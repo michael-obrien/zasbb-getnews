@@ -1,7 +1,7 @@
 'use strict';
 
-var bb = require('./10_bbparse');
-var timeConvert = require('./11_time-convert');
+var bb = require('./bbparse');
+var timeConvert = require('./time-convert');
 
 var seneca = require('seneca')();
 
